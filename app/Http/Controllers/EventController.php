@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Event;
 use App\Http\Requests\StoreEventRequest;
 use App\Http\Requests\UpdateEventRequest;
+use App\Models\Tag;
 
 class EventController extends Controller
 {
@@ -15,7 +16,10 @@ class EventController extends Controller
      */
     public function index()
     {
-        //
+        $events = Event::all();
+        
+
+        return view('admin.events.index', compact('events'));
     }
 
     /**
@@ -25,7 +29,9 @@ class EventController extends Controller
      */
     public function create()
     {
-        //
+       
+
+        return view('admin.events.create');
     }
 
     /**
@@ -36,7 +42,19 @@ class EventController extends Controller
      */
     public function store(StoreEventRequest $request)
     {
-        //
+        $validated_data = $request->validated();
+
+        $newEvent = new Event();
+        $newEvent->fill($validated_data);
+        $newEvent->save();
+
+        if ($request->tags) {
+            $newEvent->tags()->attach($request->tags);
+        }
+
+
+       return redirect()->route("admin.events.index");
+
     }
 
     /**
@@ -47,7 +65,7 @@ class EventController extends Controller
      */
     public function show(Event $event)
     {
-        //
+        return view('admin.events.show', compact('event'));
     }
 
     /**
@@ -58,7 +76,9 @@ class EventController extends Controller
      */
     public function edit(Event $event)
     {
-        //
+      
+
+        return view('admin.events.edit', compact('event'));
     }
 
     /**
@@ -70,7 +90,10 @@ class EventController extends Controller
      */
     public function update(UpdateEventRequest $request, Event $event)
     {
-        //
+        $validated_data = $request->validated();
+        $event->update($validated_data);
+
+        return redirect()->route('admin.events.show', $event->id);
     }
 
     /**
@@ -81,6 +104,8 @@ class EventController extends Controller
      */
     public function destroy(Event $event)
     {
-        //
+        $event->delete();
+
+        return redirect()->route('admin.events.index');
     }
 }

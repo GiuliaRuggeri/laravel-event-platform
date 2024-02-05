@@ -13,7 +13,7 @@ class StoreEventRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,12 @@ class StoreEventRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => 'required|min:2|max:255',
+            'date' => 'required',
+            'available_tickets' => 'required',
+            'user_id' => ["nullable", "exists:users,id"],
+            'tag_id' => ["nullable", "exists:tags,id"]
+            
         ];
     }
 }

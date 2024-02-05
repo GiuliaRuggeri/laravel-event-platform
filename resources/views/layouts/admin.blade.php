@@ -41,6 +41,18 @@
                                     <i class="fa-solid fa-tachometer-alt fa-lg fa-fw"></i> Dashboard
                                 </a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white {{ Route::currentRouteName() == 'admin.events.index' ? 'bg-secondary' : '' }}"
+                                    href="{{ route('admin.events.index') }}">
+                                    <i class="fa-solid fa-rectangle-list fa-lg fa-fw"></i> Events list
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white {{ Route::currentRouteName() == 'admin.events.create' ? 'bg-secondary' : '' }}"
+                                    href="{{ route('admin.events.create') }}">
+                                    <i class="fa-solid fa-square-plus fa-lg fa-fw"></i> Create new event
+                                </a>
+                            </li>
 
                             <li class="nav-item">
                                 <a class="nav-link text-white" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
