@@ -43,6 +43,8 @@ class EventController extends Controller
     public function store(StoreEventRequest $request)
     {
         $validated_data = $request->validated();
+        $user = auth()->user()->id;
+        $validated_data['user_id'] = $user;
 
         $newEvent = new Event();
         $newEvent->fill($validated_data);
