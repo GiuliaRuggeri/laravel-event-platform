@@ -53,6 +53,18 @@
                                     <i class="fa-solid fa-square-plus fa-lg fa-fw"></i> Create new event
                                 </a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white {{ Route::currentRouteName() == 'admin.tags.index' ? 'bg-secondary' : '' }}"
+                                    href="{{ route('admin.tags.index') }}">
+                                    <i class="fa-solid fa-rectangle-list fa-lg fa-fw"></i> Tags list
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white {{ Route::currentRouteName() == 'admin.tags.create' ? 'bg-secondary' : '' }}"
+                                    href="{{ route('admin.tags.create') }}">
+                                    <i class="fa-solid fa-square-plus fa-lg fa-fw"></i> Create new tag
+                                </a>
+                            </li>
 
                             <li class="nav-item">
                                 <a class="nav-link text-white" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
