@@ -42,12 +42,21 @@
                         @error('available_tickets')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
-                    </div>  
+                    </div>
+                    <div class="mb-3">
+                        <label for="tags" class="form-label">Tags</label>
+                        <select multiple name="tags[]" id="tags" class="form-select">
+                            <option value="">No tags</option>
+                            @foreach ($tags as $tag)
+                                <option value="{{ $tag->id }}">{{ $tag->name }}</option>
+                            @endforeach 
+                        </select>
+                    </div>
                     <button type="submit" class="btn btn-primary mb-2">Add</button>
                 </form>
 
             </div>
-          
+
         </div>
 
     </div>

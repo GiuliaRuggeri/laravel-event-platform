@@ -17,9 +17,10 @@ class EventController extends Controller
     public function index()
     {
         $events = Event::all();
+        $tags = Tag::all();
         
 
-        return view('admin.events.index', compact('events'));
+        return view('admin.events.index', compact('events', 'tags'));
     }
 
     /**
@@ -29,9 +30,9 @@ class EventController extends Controller
      */
     public function create()
     {
-       
+       $tags = Tag::all();
 
-        return view('admin.events.create');
+        return view('admin.events.create', compact('tags'));
     }
 
     /**
@@ -79,8 +80,9 @@ class EventController extends Controller
     public function edit(Event $event)
     {
       
+        $tags = Tag::all();
 
-        return view('admin.events.edit', compact('event'));
+        return view('admin.events.edit', compact('event', 'tags'));
     }
 
     /**

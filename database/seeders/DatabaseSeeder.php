@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -14,11 +15,19 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-       $this->call([
+        $num_users = $this->command->ask("Quanti utenti?");
+        $num_events = $this->command->ask("Quanti eventi?");
+       
+        
 
-        EventSeeder::class,
-        TagSeeder::class
+        $this->call(UserSeeder::class, false, compact("num_users"));
+        $this->call(EventSeeder::class, false, compact("num_users"));
 
-       ]);
+        $this->call(
+         TagSeeder::class   
+        );
+        
+
+    
     }
 }
