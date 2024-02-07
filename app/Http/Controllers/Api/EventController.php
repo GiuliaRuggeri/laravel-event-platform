@@ -17,4 +17,14 @@ class EventController extends Controller
         ];
         return response()->json($data);
     }
+
+    public function show( $id){
+
+        $result = Event::with("user")->where("id", "=", $id)->get();
+        $data = [
+            "success" => true,
+            "payload" => $result
+        ];
+        return response()->json($data);
+    }
 }
