@@ -4,7 +4,7 @@
     <div class="">
         <div class="container">
             <div class="row">
-                <h2 class="">New Event</h2>
+                <h2 class="">New Tag</h2>
                 @if ($errors->any())
                     <div class="alert alert-danger">
                         <ul>
