@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\EventController;
+use App\Http\Controllers\Api\TagController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,3 +21,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 Route::get("/events", [EventController::class, "index"]);
 Route::get("/events/{id}", [EventController::class, "show"]);
+Route::get("/tags", [TagController::class, "index"]);
+Route::get("/tags/{id}", [TagController::class, "show"]);

@@ -3,14 +3,14 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\Event;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 
-class EventController extends Controller
+class TagController extends Controller
 {
     public function index()
     {
-        $results = Event::with("user")->get();
+        $results = Tag::with(["events"])->get();
         $data = [
             "success" => true,
             "payload" => $results
@@ -21,7 +21,7 @@ class EventController extends Controller
     public function show($id)
     {
 
-        $result = Event::with(["user", "tags"])->where("id", "=", $id)->first();
+        $result = Tag::with(["events"])->find($id);
         if ($result) {
             $data = [
                 "success" => true,
@@ -31,7 +31,7 @@ class EventController extends Controller
         }else{
             $data = [
                 "success" => false,
-                "payload" => "There isn't an event with this id",
+                "payload" => "No tags available",
             ];
             return response()->json($data);
         }
