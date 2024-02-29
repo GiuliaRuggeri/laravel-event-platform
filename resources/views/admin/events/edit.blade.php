@@ -27,6 +27,11 @@
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
+                    <input type="file" class="form-control @error('photo') is-invalid @enderror" id="photo"
+                        name="photo" placeholder="Add event photo" value="{{ old('photo') ?? $event->photo }}">
+                    @error('photo')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                     <div class="mb-3">
                         <label for="date" class="form-label">Date</label>
                         <input type="text" class="form-control @error('date') is-invalid @enderror" id="date"

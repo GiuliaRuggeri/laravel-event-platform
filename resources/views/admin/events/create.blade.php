@@ -16,7 +16,7 @@
                 @endif
             </div>
             <div class="row">
-                <form action="{{ route('admin.events.store') }}" method="POST" class="">
+                <form action="{{ route('admin.events.store') }}" method="POST" enctype="multipart/form-data" class="">
                     @csrf
                     <div class="mb-3">
                         <label for="name" class="form-label">Name</label>
@@ -26,6 +26,11 @@
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
+                    <input type="file" class="form-control @error('photo') is-invalid @enderror" id="photo"
+                        name="photo" placeholder="Add event photo">
+                    @error('photo')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                     <div class="mb-3">
                         <label for="date" class="form-label">Date</label>
                         <input type="text" class="form-control @error('date') is-invalid @enderror" id="date"
@@ -49,7 +54,7 @@
                             <option value="">No tags</option>
                             @foreach ($tags as $tag)
                                 <option value="{{ $tag->id }}">{{ $tag->name }}</option>
-                            @endforeach 
+                            @endforeach
                         </select>
                     </div>
                     <button type="submit" class="btn btn-primary mb-2">Add</button>

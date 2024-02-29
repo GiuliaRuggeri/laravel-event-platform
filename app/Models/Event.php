@@ -13,6 +13,7 @@ class Event extends Model
         "user_id",
         "name",
         "date",
+        "photo",
         "available_tickets"
     ];
 

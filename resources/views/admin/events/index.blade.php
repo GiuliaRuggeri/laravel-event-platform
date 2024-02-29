@@ -9,6 +9,7 @@
                         <div class="card-header text-center">{{ $event->name }}</div>
                         <div class="card-body d-flex flex-column align-items-center">
                             <p>{{ $event->user->name }}</p>
+                            <img src="{{asset("storage/".$event->photo)}}" class="card-photo-top img-fluid" alt="{{ $event->name }}">
                             <p class="mt-2">{{ $event->date }}</p>
                             <p>{{ $event->available_tickets }}</p>
                             @if (count($event->tags) > 0)

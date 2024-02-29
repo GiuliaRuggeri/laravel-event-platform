@@ -6,6 +6,7 @@ use App\Models\Event;
 use App\Http\Requests\StoreEventRequest;
 use App\Http\Requests\UpdateEventRequest;
 use App\Models\Tag;
+use Illuminate\Support\Facades\Storage;
 
 class EventController extends Controller
 {
@@ -18,7 +19,7 @@ class EventController extends Controller
     {
         $events = Event::all();
         $tags = Tag::all();
-        
+
 
         return view('admin.events.index', compact('events', 'tags'));
     }
@@ -30,7 +31,7 @@ class EventController extends Controller
      */
     public function create()
     {
-       $tags = Tag::all();
+        $tags = Tag::all();
 
         return view('admin.events.create', compact('tags'));
     }
@@ -46,6 +47,8 @@ class EventController extends Controller
         $validated_data = $request->validated();
         $user = auth()->user()->id;
         $validated_data['user_id'] = $user;
+        $path = Storage::disk("public")->put('/uploads', $request['photo']);
+        $validated_data["photo"] = $path;
 
         $newEvent = new Event();
         $newEvent->fill($validated_data);
@@ -56,8 +59,7 @@ class EventController extends Controller
         }
 
 
-       return redirect()->route("admin.events.index");
-
+        return redirect()->route("admin.events.index");
     }
 
     /**
@@ -79,7 +81,7 @@ class EventController extends Controller
      */
     public function edit(Event $event)
     {
-      
+
         $tags = Tag::all();
 
         return view('admin.events.edit', compact('event', 'tags'));
@@ -96,6 +98,17 @@ class EventController extends Controller
     {
         $validated_data = $request->validated();
         $event->update($validated_data);
+        if($request->hasFile("photo")){
+
+            if ($event ->photo){
+
+                Storage::disk("public")->delete($event->photo);
+
+            }
+            $path = Storage::disk("public")->put('/uploads', $request['photo']);
+            $validated_data ["photo"] = $path;
+
+        }
 
         return redirect()->route('admin.events.show', $event->id);
     }
